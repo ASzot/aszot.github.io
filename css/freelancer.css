@@ -159,6 +159,7 @@ section.success {
 }
 #portfolio .portfolio-item img {
   border-radius: 50%;
+  height: 220px;
 }
 #portfolio .portfolio-item p {
   margin-top: 20px;
