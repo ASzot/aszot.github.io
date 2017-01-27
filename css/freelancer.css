@@ -111,6 +111,9 @@ header .intro-text .mission {
   color: white;
   border-color: #ecf0f1;
 }
+.navbar-custom .home-link {
+  background: url('/img/usc-logo.png');
+}
 @media (min-width: 768px) {
   .navbar-custom {
     padding: 25px 0;
