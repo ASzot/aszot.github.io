@@ -45,7 +45,7 @@ Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or O
     <author></author>
     <guid>https://andrewszot.com/posts/voice_conversion/</guid>
     <description><![CDATA[How well can we convert speech between people&rsquo;s voices? By: Andrew Szot, Arshdeep Singh, Md Nasir, Sriram Somasundaram
-Introduction Recently, there have been many results in computer vision with the introduction of deeper convolutional models that encode higher dimensional and interpretable features (neural style) [1]. In contrast, deep and thorough understanding of speech has suffered from the lack of deep learning models catering to audio signals. For a while, traditional audio processing techniques remained dominant over deep learning approaches in terms of audio classification and detection.]]></description>
+Introduction Recently, there have been many exciting results in computer vision with the introduction of deeper convolutional models that encode higher dimensional and interpretable features (neural style) [1]. In contrast, deep and thorough understanding of speech has suffered from the lack of deep learning models catering to audio signals. For a while, traditional audio processing techniques remained dominant over deep learning approaches in terms of audio classification and detection.]]></description>
 </item><item>
     <title>Principle Component Analysis (PCA)</title>
     <link>https://andrewszot.com/posts/principle_component_analysis/</link>
