@@ -1,7 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Tags - tag - Andrew Szot</title>
-        <link>https://andrewszot.com/tags/</link>
+        <link>https://www.andrewszot.com/tags/</link>
         <description>Tags - tag - Andrew Szot</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://andrewszot.com/tags/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://www.andrewszot.com/tags/" rel="self" type="application/rss+xml" /></channel>
 </rss>

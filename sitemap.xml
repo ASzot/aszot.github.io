@@ -2,14 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://andrewszot.com/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/rl_envs/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/exploration_survey/</loc><lastmod>2019-04-01T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/streaming_flat_csv_db/</loc><lastmod>2018-07-30T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/gym_with_mujoco/</loc><lastmod>2018-04-05T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/voice_conversion/</loc><lastmod>2017-11-28T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/principle_component_analysis/</loc><lastmod>2017-10-05T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/posts/clustering_expectation_maximization/</loc><lastmod>2017-03-05T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://andrewszot.com/categories/</loc></url><url>
-            <loc>https://andrewszot.com/tags/</loc></url></urlset>
+            <loc>https://www.andrewszot.com/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/rl_envs/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/</loc><lastmod>2020-02-12T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/exploration_survey/</loc><lastmod>2019-04-01T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/streaming_flat_csv_db/</loc><lastmod>2018-07-30T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/gym_with_mujoco/</loc><lastmod>2018-04-05T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/voice_conversion/</loc><lastmod>2017-11-28T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/principle_component_analysis/</loc><lastmod>2017-10-05T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/posts/clustering_expectation_maximization/</loc><lastmod>2017-03-05T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://www.andrewszot.com/categories/</loc></url><url>
+            <loc>https://www.andrewszot.com/tags/</loc></url></urlset>
