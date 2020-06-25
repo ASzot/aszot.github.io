@@ -1,11 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Andrew Szot</title>
-        <link>https://andrewszot.com/</link>
-        <description>Andrew Szot</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</lastBuildDate>
-            <atom:link href="https://andrewszot.com/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+        <title> - Andrew Szot</title>
+        <link>https://andrewszot.com/posts/</link>
+        <description> | Andrew Szot</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://andrewszot.com/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Keeping Track of RL Environments</title>
     <link>https://andrewszot.com/posts/rl_envs/</link>
     <pubDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</pubDate>

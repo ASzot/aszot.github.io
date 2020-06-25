@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href='bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Setting up OpenAI Gym with MuJoCo - Andrew Szot</title><meta name="Description" content=""><meta property="og:title" content="Setting up OpenAI Gym with MuJoCo" />
+<meta property="og:description" content="Introduction MuJoCo is a powerful physics simulator that you can run experiments in. OpenAI Gym makes it a useful environment to train reinforcement learning agents in.
+Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or OpenAI gym. I wanted to get more involved in RL and wanted to solve a custom physics problem I had in mind using RL. If you&rsquo;re in the same boat of wanting to solve an RL problem that uses physics simulation then this post is for you." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://andrewszot.com/posts/gym_with_mujoco/" />
+<meta property="article:published_time" content="2018-04-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Setting up OpenAI Gym with MuJoCo"/>
+<meta name="twitter:description" content="Introduction MuJoCo is a powerful physics simulator that you can run experiments in. OpenAI Gym makes it a useful environment to train reinforcement learning agents in.
+Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or OpenAI gym. I wanted to get more involved in RL and wanted to solve a custom physics problem I had in mind using RL. If you&rsquo;re in the same boat of wanting to solve an RL problem that uses physics simulation then this post is for you."/>
+<meta name="application-name" content="Andrew Szot">
+<meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://andrewszot.com/posts/gym_with_mujoco/" /><link rel="prev" href="https://andrewszot.com/posts/voice_conversion/" /><link rel="next" href="https://andrewszot.com/posts/streaming_flat_csv_db/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Setting up OpenAI Gym with MuJoCo",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/andrewszot.com\/posts\/gym_with_mujoco\/"
+        },"genre": "posts","wordcount":  1073 ,
+        "url": "https:\/\/andrewszot.com\/posts\/gym_with_mujoco\/","datePublished": "2018-04-05T00:00:00+00:00","dateModified": "2018-04-05T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+  <div class="header-wrapper wrap-pad">
+    <div class="title-header content">
+      <div class="inner" style='display: flex'>
+        <a href='/' class='title-link'>
+          <h1>Andrew Szot</h1>
+        </a>
+        <img id='me-picture' src='/landing/me.JPG'>
+      </div>
+      <div class='side-btns'>
+        <a href='https://github.com/ASzot' class="">GitHub</a>
+        <a href='/posts' class="">Blog</a>
+        <a href="javascript:void(0);" class="menu-item theme-switch" title="">
+          <i class="fas fa-adjust fa-fw"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="inner" style='display: flex'>
+              <a href='/'>
+                <h1>Andrew Szot</h1>
+              </a>
+              <img id='me-picture' src='/landing/me.JPG'>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog">Blog</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main"><div class="toc" id="toc-auto">
+            <h2 class="toc-title"></h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Setting up OpenAI Gym with MuJoCo</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-05">2018-04-05</time>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span></span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installing-mujoco-with-gym">Installing MuJoCo with Gym</a></li>
+    <li><a href="#setting-up-a-mujoco-scene">Setting Up a MuJoCo Scene</a></li>
+    <li><a href="#setting-up-a-custom-gym-mujoco-environment">Setting Up a Custom Gym MuJoCo Environment</a></li>
+    <li><a href="#miscellaneous-tasks">Miscellaneous Tasks</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>MuJoCo is a powerful physics simulator that you can run experiments in.
+OpenAI Gym makes it a useful environment to train reinforcement learning agents
+in.</p>
+<p>Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or OpenAI gym. I
+wanted to get more involved in RL and wanted to solve a custom physics problem
+I had in mind using RL. If you&rsquo;re in the same boat of wanting to solve an RL problem
+that uses physics simulation then this post is for you.</p>
+<h2 id="installing-mujoco-with-gym">Installing MuJoCo with Gym</h2>
+<p>Installing MuJoCo and Gym was a total pain. Getting MuJoCo to run alone was
+difficult enough but often the version did not match up with the version of
+Gym. (If you don&rsquo;t have a .edu email or MuJoCo will cost you).</p>
+<p>It turns out MuJoCo 0.5.7 and OpenAI Gym 0.7.4 are versions that are compatible.
+This is accurate as of March 6th, 2018. In the future other versions may be
+compatible but these are guaranteed to work.</p>
+<p>Now that you should have everything installed run the &ldquo;Humanoid&rdquo; environment to
+test that everything works.</p>
+<h2 id="setting-up-a-mujoco-scene">Setting Up a MuJoCo Scene</h2>
+<p>Surprisingly, I could not find a lot of tutorials on how to write custom MuJoCo
+Gym environments online. The source code for the existing MuJoCo environments at
+<a href="https://github.com/openai/gym/blob/master/gym/envs/mujoco/" target="_blank" rel="noopener noreffer">https://github.com/openai/gym/blob/master/gym/envs/mujoco/</a>.
+are really the only help.</p>
+<p>The first step is to define the MuJoCo scene itself. You do this through an XML
+file detailing how the scene is laid out. The best way for getting this
+done is to read the existing Gym MuJoCo scenes at
+<a href="https://github.com/openai/gym/tree/master/gym/envs/mujoco/assets">https://github.com/openai/gym/tree/master/gym/envs/mujoco/assets</a>
+and the MuJoCo XML documentation
+<a href="http://mujoco.org/book/modeling.html">http://mujoco.org/book/modeling.html</a>.
+Start with an existing MuJoCo scene in the Gym repository and go from there.</p>
+<p>For instance placing a box would look like</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&amp;</span><span class="n">lt</span> <span class="n">body</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;goal&#34;</span> <span class="n">pos</span><span class="o">=</span><span class="s2">&#34;0 6 -0.24&#34;</span> <span class="o">&amp;</span><span class="n">gt</span>
+  <span class="o">&amp;</span><span class="n">lt</span> <span class="n">geom</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;box&#34;</span> <span class="n">rgba</span><span class="o">=</span><span class="s2">&#34;1 0 0 1&#34;</span> <span class="n">size</span><span class="o">=</span><span class="s2">&#34;0.25 0.25 0.25&#34;</span> <span class="o">/</span> <span class="o">&amp;</span><span class="n">gt</span>
+<span class="o">&amp;</span><span class="n">lt</span> <span class="o">/</span><span class="n">body</span> <span class="o">&amp;</span><span class="n">gt</span>
+</code></pre></div><p>Now there&rsquo;s a couple things I had trouble figuring out.
+First of all, objects will <!-- raw HTML omitted -->not<!-- raw HTML omitted --> move if they don&rsquo;t have a joint on
+them.</p>
+<p>The different types of joints affect which way objects can be moved. For
+instance, if you are trying to have an object to move normally (be affected by
+forces in every direction) then use the <code>type=&quot;free&quot;</code> joint.
+I wanted a ball to fall down and roll normally so I put the
+<code>&quot;free&quot;</code> joint on it.
+See the full documentation on joints go <!-- raw HTML omitted -->here<!-- raw HTML omitted -->.</p>
+<p>Watch out for the options in the <code>&lt;option&gt;</code> tag. Many of the
+custom Gym MuJoCo environments will specify the <code>timestep</code> attribute
+in the option tag. A higher timestep value will mean faster simulations but
+less accuracy. Many of the Gym MuJoCo environments sacrifice accuracy for
+speed. When starting out I would recommend making sure this value is the
+default of <code>0.002</code>.</p>
+<h2 id="setting-up-a-custom-gym-mujoco-environment">Setting Up a Custom Gym MuJoCo Environment</h2>
+<p>As mentioned before, looking at the existing definitions for the default Gym MuJoCo
+environments is very helpful. Here is the general format</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MyEnv</span><span class="p">(</span><span class="n">mujoco_env</span><span class="o">.</span><span class="n">MujocoEnv</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">EzPickle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">EzPickle</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">FILE_PATH</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Absolute path to your .xml MuJoCo scene file.</span>
+        <span class="c1"># For instance if I had the file in a subfolder of the project where I</span>
+        <span class="c1"># defined this custom environment I could say </span>
+        <span class="c1"># FILE_PATH = os.getcwd() + &#39;/custom_envs/assets/simple_env.xml&#39;</span>
+        <span class="n">mujoco_env</span><span class="o">.</span><span class="n">MujocoEnv</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">FILE_PATH</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="c1"># Carry out one step </span>
+        <span class="c1"># Don&#39;t forget to do self.do_simulation(a, self.frame_skip)</span>
+
+    <span class="k">def</span> <span class="nf">viewer_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Position the camera</span>
+
+    <span class="k">def</span> <span class="nf">reset_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Reset model to original state. </span>
+        <span class="c1"># This is called in the overall env.reset method</span>
+        <span class="c1"># do not call this method directly. </span>
+
+    <span class="k">def</span> <span class="nf">_get_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="c1"># Observation of environment feed to agent. This should never be called</span>
+      <span class="c1"># directly but should be returned through reset_model and step</span>
+</code></pre></div><p>Now you have to register your environment. In the package that you defined your
+custom environment class in, put the following in <code>__init__.py</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">gym.envs.registration</span> <span class="kn">import</span> <span class="n">register</span>
+
+<span class="n">register</span><span class="p">(</span>
+  <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;MyEnv-v0&#39;</span><span class="p">,</span>
+  <span class="n">entry_point</span><span class="o">=</span><span class="s1">&#39;custom_envs.my_env:MyEnv&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div><p>Where <code>custom_envs</code> is the name of the package and
+<code>my_env</code> is the file where the custom environment <code>MyEnv</code>
+is defined.</p>
+<p>Now when actually programming your environment there are a number of methods
+that you can use to figure out what&rsquo;s going on in the physics simulation. To
+get the position of a body in the scene simply refer to its name attribute.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_body_com</span><span class="p">(</span><span class="s2">&#34;name of body here&#34;</span><span class="p">)</span>
+</code></pre></div><p>Likewise you can get the velocity of an object through
+<code>get_body_comvel</code>.</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">qvel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">qvel</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">qpos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">qpos</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</code></pre></div><p>Next you have to manually change the positions of bodies through editing this
+array. For each body there are 7 attributes. The first 3 are the position and
+the next 4 are the rotation quaternion. The array only stores this information
+for bodies that have joints. So if you had 3 bodies with joints there would be
+3 * 7 = 21 elements in this array. So simply index by the index of the body
+with
+the joint offset by 0 or 3 depending on position or rotation. Set
+the elements that you desire then set the state of the bodies.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">qpos</span><span class="p">,</span> <span class="n">qvel</span><span class="p">)</span>
+</code></pre></div><h2 id="miscellaneous-tasks">Miscellaneous Tasks</h2>
+<p>There were a number of things I wanted to do in MuJoCo but didn&rsquo;t know how
+to. First of all, I wanted to be able to set the position of an object but not
+have it be affected by any forces once set. To set the position of the object arbitrarily
+I had to put a free joint on the body. However, this meant that gravity was
+acting on it. The solution to this was to manually set the position of the body I
+wanted to fix every single step.</p>
+<p>I wanted to make a bouncy ball that would bounce off of a surface. Set the
+solref parameter to achieve this on the <code>geom</code> tag of the body.
+Lower values for the second value of solref correspond to bouncier surfaces.</p>
+<p>Here&rsquo;s what the combination of the bouncy ball and fixed surface looked like!
+(The agent decides how to orient the bounce surface).</p>
+<p><a class="lightgallery" href="/img/mujoco/show3.gif" title="/img/mujoco/show3.gif" data-thumbnail="/img/mujoco/show3.gif">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/mujoco/show3.gif"
+            data-srcset="/img/mujoco/show3.gif, /img/mujoco/show3.gif 1.5x, /img/mujoco/show3.gif 2x"
+            data-sizes="auto"
+            alt="/img/mujoco/show3.gif" width="400px" />
+    </a>
+<a class="lightgallery" href="/img/mujoco/show.gif" title="/img/mujoco/show.gif" data-thumbnail="/img/mujoco/show.gif">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/mujoco/show.gif"
+            data-srcset="/img/mujoco/show.gif, /img/mujoco/show.gif 1.5x, /img/mujoco/show.gif 2x"
+            data-sizes="auto"
+            alt="/img/mujoco/show.gif" width="400px" />
+    </a></p>
+<p>Also if you see in the second gif that it looks like the platform is slowly
+moving downwards that&rsquo;s because I wasn&rsquo;t setting the velocity to 0 on every time
+step when I was fixing the object.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>These are the primary things I have ran into while using MuJoCo so far. I will
+update this post if I run into anything more. If you
+have any questions or if anything is incorrect be sure send me an email &ldquo;m e [at] andrewszot [dot] com&rdquo;
+(obviously no spaces).</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();"></a></span>&nbsp;|&nbsp;<span><a href="/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/voice_conversion/" class="prev" rel="prev" title="Voice Conversion"><i class="fas fa-angle-left fa-fw"></i>Voice Conversion</a>
+            <a href="/posts/streaming_flat_csv_db/" class="next" rel="next" title="Tea-time: Stream Financial Series Data from CSVs">Tea-time: Stream Financial Series Data from CSVs<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
+                    Andrew Szot<span itemprop="copyrightYear"> 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

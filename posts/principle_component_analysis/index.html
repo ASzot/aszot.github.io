@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href='bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Principle Component Analysis (PCA) - Andrew Szot</title><meta name="Description" content=""><meta property="og:title" content="Principle Component Analysis (PCA)" />
+<meta property="og:description" content="With high dimensional data it is hard to observe the correlations between variables. Principle Component Analysis (PCA) is a tool to solve this problem. PCA is a data dimensionality reduction technique that project high dimension data to a lower dimension. This can make your data easier to analyze, visualize or preform classification on.
+The curse of dimensionality means that with higher dimensional data we need exponentially more samples (for a more detailed look check out this post from freeCodeCamp)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://andrewszot.com/posts/principle_component_analysis/" />
+<meta property="article:published_time" content="2017-10-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-10-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Principle Component Analysis (PCA)"/>
+<meta name="twitter:description" content="With high dimensional data it is hard to observe the correlations between variables. Principle Component Analysis (PCA) is a tool to solve this problem. PCA is a data dimensionality reduction technique that project high dimension data to a lower dimension. This can make your data easier to analyze, visualize or preform classification on.
+The curse of dimensionality means that with higher dimensional data we need exponentially more samples (for a more detailed look check out this post from freeCodeCamp)."/>
+<meta name="application-name" content="Andrew Szot">
+<meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://andrewszot.com/posts/principle_component_analysis/" /><link rel="prev" href="https://andrewszot.com/posts/clustering_expectation_maximization/" /><link rel="next" href="https://andrewszot.com/posts/voice_conversion/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Principle Component Analysis (PCA)",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/andrewszot.com\/posts\/principle_component_analysis\/"
+        },"genre": "posts","wordcount":  832 ,
+        "url": "https:\/\/andrewszot.com\/posts\/principle_component_analysis\/","datePublished": "2017-10-05T00:00:00+00:00","dateModified": "2017-10-05T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+  <div class="header-wrapper wrap-pad">
+    <div class="title-header content">
+      <div class="inner" style='display: flex'>
+        <a href='/' class='title-link'>
+          <h1>Andrew Szot</h1>
+        </a>
+        <img id='me-picture' src='/landing/me.JPG'>
+      </div>
+      <div class='side-btns'>
+        <a href='https://github.com/ASzot' class="">GitHub</a>
+        <a href='/posts' class="">Blog</a>
+        <a href="javascript:void(0);" class="menu-item theme-switch" title="">
+          <i class="fas fa-adjust fa-fw"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="inner" style='display: flex'>
+              <a href='/'>
+                <h1>Andrew Szot</h1>
+              </a>
+              <img id='me-picture' src='/landing/me.JPG'>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog">Blog</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main"><div class="toc" id="toc-auto">
+            <h2 class="toc-title"></h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Principle Component Analysis (PCA)</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-10-05">2017-10-05</time>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span></span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>With high dimensional data it is hard to observe the correlations
+between variables. Principle Component Analysis (PCA) is a tool to solve this
+problem. PCA is a data dimensionality reduction technique that project high
+dimension data to a lower dimension. This can make your data easier to
+analyze, visualize or preform classification on.</p>
+<p>The curse of dimensionality means that with higher dimensional data we need
+exponentially more samples (for a more detailed look check out <!-- raw HTML omitted -->this
+post from freeCodeCamp<!-- raw HTML omitted -->). PCA is a maintain the <!-- raw HTML omitted -->structure<!-- raw HTML omitted --> of the
+data in lower dimensions. Of course this could be valuable in high
+dimensional data classification tasks where we don&rsquo;t have enough samples to
+train a classifier. A common task is to project to 2 or 3 dimensions where we
+can plot the data. For example below is an example of the iris dataset (not
+2D data!) projected into 2 dimensions using 2D. It keeps the intuitive
+<em>shape</em> of the data.</p>
+<a class="lightgallery" href="/img/traditional/pca/example.png" title="/img/traditional/pca/example.png" data-thumbnail="/img/traditional/pca/example.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/traditional/pca/example.png"
+            data-srcset="/img/traditional/pca/example.png, /img/traditional/pca/example.png 1.5x, /img/traditional/pca/example.png 2x"
+            data-sizes="auto"
+            alt="/img/traditional/pca/example.png" width="400px" />
+    </a>
+<p>So what exactly does PCA do? It is a <!-- raw HTML omitted -->linear dimension reduction
+technique<!-- raw HTML omitted -->.
+$$
+x&rsquo; = U^T x
+$$
+We want to find a $ U $ for this equation. $ U
+$ should have dimensions $ D \times R $ where $ D $ is the dimension of
+the original dataset and $ R $ is the dimension of the projected data. The
+core idea of PCA is finding a $ U $ that maintains the variance along the
+principle components of the dataset. We will explore this idea throughout the
+rest of the post.</p>
+<p>The first step in PCA is to standardize all of the features so that we can
+compare variances between features equally. Each of our
+features could be in entirely different scales. For instance we could have
+one feature be &ldquo;height (meters)&rdquo; and another be &ldquo;diameter (centimeters)&rdquo;. We
+want all of our data to be on the same scale. To do this we standardize the
+data. Standardization means converting each feature to have mean 0 and
+standard deviation 1. Along each feature use the following equation.</p>
+<p>$$
+z = \frac{x - \mu}{\sigma}
+$$</p>
+<p>Where $ \mu $ is the mean along that feature&rsquo;s axis and $ \sigma $ is the
+standard deviation. $ z $ is referred to as the $ z $ score and is our
+standardized data.</p>
+<p>Next we are going to want to calculate how all of the variables relate to one
+another. We do this through the covariance matrix. We can calculate the
+covariance matrix by multiplying our data matrix $ \textbf{X} $ by its
+transpose. (And multiplying by a constant $ \frac{1}{N} ). This assumes the data has already
+been standardized.</p>
+<p>$$
+S = \frac{1}{N} \sum_i x_i x_i^T
+$$</p>
+<p>As stated before, the goal of PCA is to maximize the variance of the data
+along the principle components. To start off with let&rsquo;s say maximizing the
+variance of the data along just a single arbitrary line. How could we select
+a vector $ v $ to maximize the variance of the points projected onto the
+line $ v $? So we would like to find $ u $ to maximize the following
+(keep in mind $ S $ is just a single number in this 1 dimensional case).</p>
+<p>$$
+S = \frac{1}{N} \sum_i (u^T x_i)^2
+$$</p>
+<p>Simplifying the expression a little bit gives:</p>
+<p>$$
+S = \frac{1}{N} \sum_i u^T x_i x_i^T u = u^T \left( \sum_i x_i x_i^T \right) u
+= u^T S u
+$$</p>
+<p>By definition we know that the covariance $ S $ is positive semidefinite.
+So that means $ u^T S u $ can grow without bound. Let&rsquo;s constrain this
+problem a little bit more by saying $ \lVert u \lVert_2^2 = 1 $. We can then apply
+lagrangian multiplier (read more about it <a href="http://tutorial.math.lamar.edu/Classes/CalcIII/LagrangeMultipliers.aspx" target="_blank" rel="noopener noreffer">here</a>) to get:</p>
+<p>$$
+u^T S u + \lambda (1 - \lVert u \lVert _2^2)
+$$</p>
+<p>$$
+u^T S u + \lambda ( 1 - u^T u )
+$$</p>
+<p>$$
+\frac{\partial L}{\partial u} = 2S u - 2\lambda u = 0
+$$</p>
+<p>$$
+Su = \lambda u
+$$</p>
+<p>This is the definition of an eigenvector! Therefore we know to select
+an eigenvector such that $ \lambda u $ is maximized. This is going to be
+the eigenvector with the largest eigenvalue $ \lambda $.</p>
+<p>Therefore, it is sensible to see that the eigenvectors with small eigenvalues
+will have a small contribution to the projected variance. Therefore, we can
+in general project to any number of dimensions $ R $ by selecting only the
+top $ R $ eigenvectors (sorted by eigenvalue). This will maximize the
+variance in our projected space.</p>
+<p>We then use these eigenvectors to construct the projection matrix (we just simply concatenate
+the eigenvectors into a matrix). We then use this matrix to project our data
+into the desired dimension $ N $.</p>
+<p>We can then multiply our data matrix by the PCA projection matrix to get the
+projection into the lower dimension.</p>
+<p><a href="https://github.com/ASzot/machine-learning-alg-examples/blob/master/pca.ipynb" target="_blank" rel="noopener noreffer">I put together a Python notebook with an implementation of PCA in numpy here.</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();"></a></span>&nbsp;|&nbsp;<span><a href="/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/clustering_expectation_maximization/" class="prev" rel="prev" title="Clustering, K-Means, Mixture Models, Expectation Maximization"><i class="fas fa-angle-left fa-fw"></i>Clustering, K-Means, Mixture Models, Expectation Maximization</a>
+            <a href="/posts/voice_conversion/" class="next" rel="next" title="Voice Conversion">Voice Conversion<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
+                    Andrew Szot<span itemprop="copyrightYear"> 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
