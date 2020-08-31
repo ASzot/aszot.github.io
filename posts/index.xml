@@ -3,7 +3,14 @@
         <title> - Andrew Szot</title>
         <link>https://www.andrewszot.com/posts/</link>
         <description> | Andrew Szot</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.andrewszot.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 30 Aug 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.andrewszot.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Practical Challenges of Imitation Learning from Observation</title>
+    <link>https://www.andrewszot.com/posts/on_lfo/</link>
+    <pubDate>Sun, 30 Aug 2020 00:00:00 &#43;0000</pubDate>
+    <author></author>
+    <guid>https://www.andrewszot.com/posts/on_lfo/</guid>
+    <description><![CDATA[Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception.]]></description>
+</item><item>
     <title>Keeping Track of RL Environments</title>
     <link>https://www.andrewszot.com/posts/rl_envs/</link>
     <pubDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</pubDate>
