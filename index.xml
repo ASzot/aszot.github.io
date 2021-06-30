@@ -26,8 +26,7 @@ If you have a specific project idea, this list can be helpful to find the right 
     <pubDate>Mon, 01 Apr 2019 00:00:00 &#43;0000</pubDate>
     <author></author>
     <guid>https://www.andrewszot.com/posts/exploration_survey/</guid>
-    <description><![CDATA[Written in my college writing class for people without a background in reinforcement learning.
-What has driven human accomplishments in sciences? Why do humans want to understand the world around them? The answer could possibly have to do with curiosity, the desire to learn or know something. Artificial intelligence (AI) seeks to create machines that can learn and think for themselves, just as humans do. Intuitively, curiosity is a crucial component of our learning.]]></description>
+    <description><![CDATA[What has driven human accomplishments in sciences? Why do humans want to understand the world around them? The answer could possibly have to do with curiosity, the desire to learn or know something. Artificial intelligence (AI) seeks to create machines that can learn and think for themselves, just as humans do. Intuitively, curiosity is a crucial component of our learning. How can we give machines a sense of curiosity and desire to learn about the world around them?]]></description>
 </item><item>
     <title>Tea-time: Stream Financial Series Data from CSVs</title>
     <link>https://www.andrewszot.com/posts/streaming_flat_csv_db/</link>
@@ -38,14 +37,6 @@ What has driven human accomplishments in sciences? Why do humans want to underst
 CSV files are a common format for financial time series data. For instance, you could store the pricing data for a stock in a file stock_symb.csv:
  Date,Open,High,Low,Close,Volume 2018-07-02,24.320000,24.740000,24.320000,24.670000,61000 2018-07-03,24.799999,25.010000,24.700001,24.830000,50900 2018-07-05,24.850000,24.959999,24.690001,24.900000,59000 2018-07-06,24.980000,25.030001,24.700001,24.790001,51400 2018-07-09,24.950001,25.230000,24.830000,24.950001,92000 2018-07-10,24.950001,25.100000,24.780001,24.830000,107200 2018-07-11,24.750000,25.070000,24.750000,24.840000,81900 2018-07-12,24.879999,24.980000,24.660000,24.969999,35000 2018-07-13,24.969999,25.290001,24.920000,25.020000,55700 2018-07-16,25.049999,25.129999,24.809999,24.920000,49000 2018-07-17,24.920000,25.000000,24.809999,24.950001,58300 2018-07-18,24.959999,25.000000,24.530001,24.780001,48800 2018-07-19,24.780001,24.860001,24.590000,24.750000,49400 2018-07-20,24.700001,24.990000,24.700001,24.730000,78100 2018-07-23,24.730000,24.959999,24.730000,24.920000,49100 2018-07-24,24.900000,24.950001,24.719999,24.809999,43200 2018-07-25,24.799999,24.940001,24.379999,24.540001,44900 2018-07-26,24.]]></description>
 </item><item>
-    <title>Setting up OpenAI Gym with MuJoCo</title>
-    <link>https://www.andrewszot.com/posts/gym_with_mujoco/</link>
-    <pubDate>Thu, 05 Apr 2018 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/gym_with_mujoco/</guid>
-    <description><![CDATA[Introduction MuJoCo is a powerful physics simulator that you can run experiments in. OpenAI Gym makes it a useful environment to train reinforcement learning agents in.
-Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or OpenAI gym. I wanted to get more involved in RL and wanted to solve a custom physics problem I had in mind using RL. If you&rsquo;re in the same boat of wanting to solve an RL problem that uses physics simulation then this post is for you.]]></description>
-</item><item>
     <title>Voice Conversion</title>
     <link>https://www.andrewszot.com/posts/voice_conversion/</link>
     <pubDate>Tue, 28 Nov 2017 00:00:00 &#43;0000</pubDate>
@@ -53,21 +44,5 @@ Before doing this, I didn&rsquo;t have a lot of experience with RL, MuJoCo, or O
     <guid>https://www.andrewszot.com/posts/voice_conversion/</guid>
     <description><![CDATA[How well can we convert speech between people&rsquo;s voices? By: Andrew Szot, Arshdeep Singh, Md Nasir, Sriram Somasundaram
 Introduction Recently, there have been many exciting results in computer vision with the introduction of deeper convolutional models that encode higher dimensional and interpretable features (neural style) [1]. In contrast, deep and thorough understanding of speech has suffered from the lack of deep learning models catering to audio signals. For a while, traditional audio processing techniques remained dominant over deep learning approaches in terms of audio classification and detection.]]></description>
-</item><item>
-    <title>Principle Component Analysis (PCA)</title>
-    <link>https://www.andrewszot.com/posts/principle_component_analysis/</link>
-    <pubDate>Thu, 05 Oct 2017 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/principle_component_analysis/</guid>
-    <description><![CDATA[With high dimensional data it is hard to observe the correlations between variables. Principle Component Analysis (PCA) is a tool to solve this problem. PCA is a data dimensionality reduction technique that project high dimension data to a lower dimension. This can make your data easier to analyze, visualize or preform classification on.
-The curse of dimensionality means that with higher dimensional data we need exponentially more samples (for a more detailed look check out this post from freeCodeCamp).]]></description>
-</item><item>
-    <title>Clustering, K-Means, Mixture Models, Expectation Maximization</title>
-    <link>https://www.andrewszot.com/posts/clustering_expectation_maximization/</link>
-    <pubDate>Sun, 05 Mar 2017 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/clustering_expectation_maximization/</guid>
-    <description><![CDATA[Clustering is an unsupervised form of learning. We have data but no labels and we want to infer some sort of labels from the data alone. So what does clustering do? Say we have a bunch of data points $ x $ that look like below.
- Clearly, the green, red, and blue data points represent three different clusters. The goal of clustering is to be able to determine these clusters meaning figure out which data point belongs to which cluster.]]></description>
 </item></channel>
 </rss>

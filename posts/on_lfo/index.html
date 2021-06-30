@@ -10,9 +10,10 @@
         <title>Practical Challenges of Imitation Learning from Observation - Andrew Szot</title><meta name="Description" content=""><meta property="og:title" content="Practical Challenges of Imitation Learning from Observation" />
 <meta property="og:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewszot.com/posts/on_lfo/" />
-<meta property="article:published_time" content="2020-08-30T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-30T00:00:00+00:00" />
+<meta property="og:url" content="https://www.andrewszot.com/posts/on_lfo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-08-30T00:00:00&#43;00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Practical Challenges of Imitation Learning from Observation"/>
 <meta name="twitter:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception."/>
@@ -43,7 +44,7 @@
         <a href='/' class='title-link'>
           <h1>Andrew Szot</h1>
         </a>
-        <img id='me-picture' src='/landing/me.JPG'>
+        <img id='me-picture' src='/landing/me.jpg'>
       </div>
       <div class='side-btns'>
         <a href='/landing/personal_cv.pdf' class="">CV</a>
@@ -62,7 +63,7 @@
               <a href='/'>
                 <h1>Andrew Szot</h1>
               </a>
-              <img id='me-picture' src='/landing/me.JPG'>
+              <img id='me-picture' src='/landing/me.jpg'>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -166,62 +167,62 @@ The table of hyperparameters used for this plot is below.</p>
 <table>
 <thead>
 <tr>
-<th align="center">Hyperparam</th>
-<th align="center">Value</th>
+<th style="text-align:center">Hyperparam</th>
+<th style="text-align:center">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">$\alpha$ (num updates)</td>
-<td align="center">50</td>
+<td style="text-align:center">$\alpha$ (num updates)</td>
+<td style="text-align:center">50</td>
 </tr>
 <tr>
-<td align="center">Inverse model architecture</td>
-<td align="center">(400,300)</td>
+<td style="text-align:center">Inverse model architecture</td>
+<td style="text-align:center">(400,300)</td>
 </tr>
 <tr>
-<td align="center">Inverse model learning rate</td>
-<td align="center">3e-4</td>
+<td style="text-align:center">Inverse model learning rate</td>
+<td style="text-align:center">3e-4</td>
 </tr>
 <tr>
-<td align="center">Inverse model learning rate decay</td>
-<td align="center">No</td>
+<td style="text-align:center">Inverse model learning rate decay</td>
+<td style="text-align:center">No</td>
 </tr>
 <tr>
-<td align="center"># epochs per inverse model update</td>
-<td align="center">1</td>
+<td style="text-align:center"># epochs per inverse model update</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">BC policy architecture</td>
-<td align="center">(400,300)</td>
+<td style="text-align:center">BC policy architecture</td>
+<td style="text-align:center">(400,300)</td>
 </tr>
 <tr>
-<td align="center">BC learning rate</td>
-<td align="center">3e-4</td>
+<td style="text-align:center">BC learning rate</td>
+<td style="text-align:center">3e-4</td>
 </tr>
 <tr>
-<td align="center">BC learning rate decay</td>
-<td align="center">No</td>
+<td style="text-align:center">BC learning rate decay</td>
+<td style="text-align:center">No</td>
 </tr>
 <tr>
-<td align="center"># epochs per BC update</td>
-<td align="center">10</td>
+<td style="text-align:center"># epochs per BC update</td>
+<td style="text-align:center">10</td>
 </tr>
 <tr>
-<td align="center">State normalization</td>
-<td align="center">Yes, from expert state data</td>
+<td style="text-align:center">State normalization</td>
+<td style="text-align:center">Yes, from expert state data</td>
 </tr>
 <tr>
-<td align="center">BC stochastic policy</td>
-<td align="center">Yes, learned mean and standard dev for norm dist</td>
+<td style="text-align:center">BC stochastic policy</td>
+<td style="text-align:center">Yes, learned mean and standard dev for norm dist</td>
 </tr>
 <tr>
-<td align="center"># random exploration steps</td>
-<td align="center">200k</td>
+<td style="text-align:center"># random exploration steps</td>
+<td style="text-align:center">200k</td>
 </tr>
 <tr>
-<td align="center">total # environment steps</td>
-<td align="center">10M</td>
+<td style="text-align:center">total # environment steps</td>
+<td style="text-align:center">10M</td>
 </tr>
 </tbody>
 </table>
@@ -257,46 +258,46 @@ hyperparameters except the reward type are fixed across runs. Interestingly, som
 <table>
 <thead>
 <tr>
-<th align="center">Hyperparam</th>
-<th align="center">Value</th>
+<th style="text-align:center">Hyperparam</th>
+<th style="text-align:center">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">Policy architecture</td>
-<td align="center">(400,300)</td>
+<td style="text-align:center">Policy architecture</td>
+<td style="text-align:center">(400,300)</td>
 </tr>
 <tr>
-<td align="center">Policy optimizer</td>
-<td align="center">PPO</td>
+<td style="text-align:center">Policy optimizer</td>
+<td style="text-align:center">PPO</td>
 </tr>
 <tr>
-<td align="center">PPO entropy coefficient</td>
-<td align="center">0.001</td>
+<td style="text-align:center">PPO entropy coefficient</td>
+<td style="text-align:center">0.001</td>
 </tr>
 <tr>
-<td align="center">Policy learning rate</td>
-<td align="center">0.001</td>
+<td style="text-align:center">Policy learning rate</td>
+<td style="text-align:center">0.001</td>
 </tr>
 <tr>
-<td align="center">Policy learning rate decay</td>
-<td align="center">Yes</td>
+<td style="text-align:center">Policy learning rate decay</td>
+<td style="text-align:center">Yes</td>
 </tr>
 <tr>
-<td align="center">Discriminator architecture</td>
-<td align="center">(400,300)</td>
+<td style="text-align:center">Discriminator architecture</td>
+<td style="text-align:center">(400,300)</td>
 </tr>
 <tr>
-<td align="center">Discriminator learning rate</td>
-<td align="center">0.001</td>
+<td style="text-align:center">Discriminator learning rate</td>
+<td style="text-align:center">0.001</td>
 </tr>
 <tr>
-<td align="center"># of discriminator updates per policy update</td>
-<td align="center">2</td>
+<td style="text-align:center"># of discriminator updates per policy update</td>
+<td style="text-align:center">2</td>
 </tr>
 <tr>
-<td align="center">total # environment steps</td>
-<td align="center">10M</td>
+<td style="text-align:center">total # environment steps</td>
+<td style="text-align:center">10M</td>
 </tr>
 </tbody>
 </table>
@@ -409,7 +410,7 @@ issue I forget about.</li>
 </article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
-                    Andrew Szot<span itemprop="copyrightYear"> 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                    Andrew Szot<span itemprop="copyrightYear"> 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
         </div>
     </footer></div>
 

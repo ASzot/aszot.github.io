@@ -12,9 +12,10 @@
 CSV files are a common format for financial time series data. For instance, you could store the pricing data for a stock in a file stock_symb.csv:
  Date,Open,High,Low,Close,Volume 2018-07-02,24.320000,24.740000,24.320000,24.670000,61000 2018-07-03,24.799999,25.010000,24.700001,24.830000,50900 2018-07-05,24.850000,24.959999,24.690001,24.900000,59000 2018-07-06,24.980000,25.030001,24.700001,24.790001,51400 2018-07-09,24.950001,25.230000,24.830000,24.950001,92000 2018-07-10,24.950001,25.100000,24.780001,24.830000,107200 2018-07-11,24.750000,25.070000,24.750000,24.840000,81900 2018-07-12,24.879999,24.980000,24.660000,24.969999,35000 2018-07-13,24.969999,25.290001,24.920000,25.020000,55700 2018-07-16,25.049999,25.129999,24.809999,24.920000,49000 2018-07-17,24.920000,25.000000,24.809999,24.950001,58300 2018-07-18,24.959999,25.000000,24.530001,24.780001,48800 2018-07-19,24.780001,24.860001,24.590000,24.750000,49400 2018-07-20,24.700001,24.990000,24.700001,24.730000,78100 2018-07-23,24.730000,24.959999,24.730000,24.920000,49100 2018-07-24,24.900000,24.950001,24.719999,24.809999,43200 2018-07-25,24.799999,24.940001,24.379999,24.540001,44900 2018-07-26,24." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewszot.com/posts/streaming_flat_csv_db/" />
-<meta property="article:published_time" content="2018-07-30T00:00:00+00:00" />
-<meta property="article:modified_time" content="2018-07-30T00:00:00+00:00" />
+<meta property="og:url" content="https://www.andrewszot.com/posts/streaming_flat_csv_db/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-07-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2018-07-30T00:00:00&#43;00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tea-time: Stream Financial Series Data from CSVs"/>
 <meta name="twitter:description" content="This post will describe a system I made called Tea-time. Tea-Time is for reading financial time series data from a flat database of CSV files.
@@ -23,7 +24,7 @@ CSV files are a common format for financial time series data. For instance, you 
 <meta name="application-name" content="Andrew Szot">
 <meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.andrewszot.com/posts/streaming_flat_csv_db/" /><link rel="prev" href="https://www.andrewszot.com/posts/gym_with_mujoco/" /><link rel="next" href="https://www.andrewszot.com/posts/exploration_survey/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.andrewszot.com/posts/streaming_flat_csv_db/" /><link rel="prev" href="https://www.andrewszot.com/posts/voice_conversion/" /><link rel="next" href="https://www.andrewszot.com/posts/exploration_survey/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -47,7 +48,7 @@ CSV files are a common format for financial time series data. For instance, you 
         <a href='/' class='title-link'>
           <h1>Andrew Szot</h1>
         </a>
-        <img id='me-picture' src='/landing/me.JPG'>
+        <img id='me-picture' src='/landing/me.jpg'>
       </div>
       <div class='side-btns'>
         <a href='/landing/personal_cv.pdf' class="">CV</a>
@@ -66,7 +67,7 @@ CSV files are a common format for financial time series data. For instance, you 
               <a href='/'>
                 <h1>Andrew Szot</h1>
               </a>
-              <img id='me-picture' src='/landing/me.JPG'>
+              <img id='me-picture' src='/landing/me.jpg'>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -135,14 +136,14 @@ is typical for data vendors to provide pricing data in this format.</p>
 <h3 id="how-do-we-work-with-this-data">How do we work with this data?</h3>
 <p>Pandas has some great functionality when it comes to working with CSV files.
 Opening the CSV file, like the one above, would be as simple as:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AAPL.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AAPL.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div><p>This works fine for one symbol but what if you were working with many
 symbols? Furthermore, what if each CSV files has <!-- raw HTML omitted -->a lot<!-- raw HTML omitted --> of rows? This could be
 minute data or data across many years. The naive approach would be to load
 the complete data for each symbol into memory.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dfs</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">test_symbs</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_DIR</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">test_symbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_DIR</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">test_symbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">dfs</span><span class="p">[</span><span class="n">symb</span><span class="o">.</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </code></pre></div><p>However, this consumes way too much memory needlessly. We don&rsquo;t need to have
@@ -223,13 +224,13 @@ on GitHub.</a></p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/gym_with_mujoco/" class="prev" rel="prev" title="Setting up OpenAI Gym with MuJoCo"><i class="fas fa-angle-left fa-fw"></i>Setting up OpenAI Gym with MuJoCo</a>
+    <div class="post-nav"><a href="/posts/voice_conversion/" class="prev" rel="prev" title="Voice Conversion"><i class="fas fa-angle-left fa-fw"></i>Voice Conversion</a>
             <a href="/posts/exploration_survey/" class="next" rel="next" title="Curiosity Driven AI">Curiosity Driven AI<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
-                    Andrew Szot<span itemprop="copyrightYear"> 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                    Andrew Szot<span itemprop="copyrightYear"> 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
         </div>
     </footer></div>
 
