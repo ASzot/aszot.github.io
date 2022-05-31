@@ -13,8 +13,8 @@ CSV files are a common format for financial time series data. For instance, you 
  Date,Open,High,Low,Close,Volume 2018-07-02,24.320000,24.740000,24.320000,24.670000,61000 2018-07-03,24.799999,25.010000,24.700001,24.830000,50900 2018-07-05,24.850000,24.959999,24.690001,24.900000,59000 2018-07-06,24.980000,25.030001,24.700001,24.790001,51400 2018-07-09,24.950001,25.230000,24.830000,24.950001,92000 2018-07-10,24.950001,25.100000,24.780001,24.830000,107200 2018-07-11,24.750000,25.070000,24.750000,24.840000,81900 2018-07-12,24.879999,24.980000,24.660000,24.969999,35000 2018-07-13,24.969999,25.290001,24.920000,25.020000,55700 2018-07-16,25.049999,25.129999,24.809999,24.920000,49000 2018-07-17,24.920000,25.000000,24.809999,24.950001,58300 2018-07-18,24.959999,25.000000,24.530001,24.780001,48800 2018-07-19,24.780001,24.860001,24.590000,24.750000,49400 2018-07-20,24.700001,24.990000,24.700001,24.730000,78100 2018-07-23,24.730000,24.959999,24.730000,24.920000,49100 2018-07-24,24.900000,24.950001,24.719999,24.809999,43200 2018-07-25,24.799999,24.940001,24.379999,24.540001,44900 2018-07-26,24." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewszot.com/posts/streaming_flat_csv_db/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-07-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2018-07-30T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2018-07-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-07-30T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tea-time: Stream Financial Series Data from CSVs"/>
@@ -52,6 +52,7 @@ CSV files are a common format for financial time series data. For instance, you 
       </div>
       <div class='side-btns'>
         <a href='/landing/personal_cv.pdf' class="">CV</a>
+        <a href='https://scholar.google.com/citations?hl=en&user=IwIWKPYAAAAJ' class="">Scholar</a>
         <a href='https://github.com/ASzot' class="">GitHub</a>
         <a href='/posts' class="">Blog</a>
         <a href="javascript:void(0);" class="menu-item theme-switch" title="">
@@ -73,7 +74,7 @@ CSV files are a common format for financial time series data. For instance, you 
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog">Blog</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog">Blog</a><a class="menu-item" href="/landing/personal_cv.pdf" title="CV">CV</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a class="menu-item" href="https://scholar.google.com/citations?hl=en&amp;user=IwIWKPYAAAAJ" title="Scholar" rel="noopener noreffer" target="_blank">Scholar</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -109,7 +110,7 @@ CSV files are a common format for financial time series data. For instance, you 
 reading financial time series data from a flat database of CSV files.</p>
 <p>CSV files are a common format for financial time series data. For instance, you
 could store the pricing data for a stock in a file <!-- raw HTML omitted -->stock_symb.csv<!-- raw HTML omitted -->:</p>
-<pre><code>  Date,Open,High,Low,Close,Volume
+<pre tabindex="0"><code>  Date,Open,High,Low,Close,Volume
   2018-07-02,24.320000,24.740000,24.320000,24.670000,61000
   2018-07-03,24.799999,25.010000,24.700001,24.830000,50900
   2018-07-05,24.850000,24.959999,24.690001,24.900000,59000
@@ -136,17 +137,17 @@ is typical for data vendors to provide pricing data in this format.</p>
 <h3 id="how-do-we-work-with-this-data">How do we work with this data?</h3>
 <p>Pandas has some great functionality when it comes to working with CSV files.
 Opening the CSV file, like the one above, would be as simple as:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AAPL.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div><p>This works fine for one symbol but what if you were working with many
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;AAPL.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><p>This works fine for one symbol but what if you were working with many
 symbols? Furthermore, what if each CSV files has <!-- raw HTML omitted -->a lot<!-- raw HTML omitted --> of rows? This could be
 minute data or data across many years. The naive approach would be to load
 the complete data for each symbol into memory.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dfs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">test_symbs</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_DIR</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">test_symbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">dfs</span><span class="p">[</span><span class="n">symb</span><span class="o">.</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-</code></pre></div><p>However, this consumes way too much memory needlessly. We don&rsquo;t need to have
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dfs</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">symb</span> <span class="ow">in</span> <span class="n">test_symbs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_DIR</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">test_symbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dfs</span><span class="p">[</span><span class="n">symb</span><span class="o">.</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+</span></span><span class="line"><span class="cl"><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</span></span></code></pre></div><p>However, this consumes way too much memory needlessly. We don&rsquo;t need to have
 the entire pricing history in memory. Typically, we only need a couple rows
 for each symbol in memory. We can do a lot better in terms of memory and
 performance than just storing plain CSV files in memory.</p>
@@ -189,13 +190,13 @@ Below is the benchmark illustration.</p>
 <p>The interface for fetching data by time and symbol is very simple using this
 system. Say you wanted to fetch the data for the last 50 days on date <!-- raw HTML omitted -->2010-01-13<!-- raw HTML omitted -->. That
 would be as simple as:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">  <span class="kn">from</span> <span class="nn">trading_calendars</span> <span class="kn">import</span> <span class="n">get_calendar</span>
-
-  <span class="n">cal</span> <span class="o">=</span> <span class="n">get_calendar</span><span class="p">(</span><span class="s1">&#39;NYSE&#39;</span><span class="p">)</span>
-  <span class="n">dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2010-01-13&#39;</span><span class="p">)</span>
-  <span class="n">cacher</span> <span class="o">=</span> <span class="n">DataCacher</span><span class="p">(</span><span class="n">cal</span><span class="p">,</span> <span class="s1">&#39;./tea-files&#39;</span><span class="p">)</span>
-  <span class="n">results</span> <span class="o">=</span> <span class="n">cacher</span><span class="o">.</span><span class="n">get_symbs</span><span class="p">([</span><span class="n">symbol</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">),</span> <span class="n">symbol</span><span class="p">(</span><span class="s1">&#39;MSFT&#39;</span><span class="p">)],</span> <span class="n">dt</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-</code></pre></div><p>Note that the system does not use raw strings for symbols but uses an object
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">  <span class="kn">from</span> <span class="nn">trading_calendars</span> <span class="kn">import</span> <span class="n">get_calendar</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">cal</span> <span class="o">=</span> <span class="n">get_calendar</span><span class="p">(</span><span class="s1">&#39;NYSE&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2010-01-13&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cacher</span> <span class="o">=</span> <span class="n">DataCacher</span><span class="p">(</span><span class="n">cal</span><span class="p">,</span> <span class="s1">&#39;./tea-files&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">results</span> <span class="o">=</span> <span class="n">cacher</span><span class="o">.</span><span class="n">get_symbs</span><span class="p">([</span><span class="n">symbol</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">),</span> <span class="n">symbol</span><span class="p">(</span><span class="s1">&#39;MSFT&#39;</span><span class="p">)],</span> <span class="n">dt</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span></span></code></pre></div><p>Note that the system does not use raw strings for symbols but uses an object
 that implements the <!-- raw HTML omitted -->symbol<!-- raw HTML omitted --> property giving the name of the
 ticker. This is so the system works well with <!-- raw HTML omitted -->Zipline<!-- raw HTML omitted -->.</p>
 <p>Overall, this sytem is optimized for reading rows sequentially for a large number
@@ -230,7 +231,7 @@ on GitHub.</a></p>
 </article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
-                    Andrew Szot<span itemprop="copyrightYear"> 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+                    Andrew Szot<span itemprop="copyrightYear"> 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
         </div>
     </footer></div>
 
