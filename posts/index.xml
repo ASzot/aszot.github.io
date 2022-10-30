@@ -11,30 +11,6 @@
     <guid>https://www.andrewszot.com/posts/on_lfo/</guid>
     <description><![CDATA[Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception.]]></description>
 </item><item>
-    <title>Keeping Track of RL Environments</title>
-    <link>https://www.andrewszot.com/posts/rl_envs/</link>
-    <pubDate>Wed, 12 Feb 2020 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/rl_envs/</guid>
-    <description><![CDATA[More environments to test reinforcement learning (RL) agents are created all the time. As specific problems in RL are tackled, the rate these environments being made seems to be growing. To keep track of everything for myself, and to maybe help others, I compiled a list of RL environments. I decided to host this list on GitHub so others can easily access it. Here is the link.
-If you have a specific project idea, this list can be helpful to find the right environment to experiment in.]]></description>
-</item><item>
-    <title>Curiosity Driven AI</title>
-    <link>https://www.andrewszot.com/posts/exploration_survey/</link>
-    <pubDate>Mon, 01 Apr 2019 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/exploration_survey/</guid>
-    <description><![CDATA[What has driven human accomplishments in sciences? Why do humans want to understand the world around them? The answer could possibly have to do with curiosity, the desire to learn or know something. Artificial intelligence (AI) seeks to create machines that can learn and think for themselves, just as humans do. Intuitively, curiosity is a crucial component of our learning. How can we give machines a sense of curiosity and desire to learn about the world around them?]]></description>
-</item><item>
-    <title>Tea-time: Stream Financial Series Data from CSVs</title>
-    <link>https://www.andrewszot.com/posts/streaming_flat_csv_db/</link>
-    <pubDate>Mon, 30 Jul 2018 00:00:00 &#43;0000</pubDate>
-    <author></author>
-    <guid>https://www.andrewszot.com/posts/streaming_flat_csv_db/</guid>
-    <description><![CDATA[This post will describe a system I made called Tea-time. Tea-Time is for reading financial time series data from a flat database of CSV files.
-CSV files are a common format for financial time series data. For instance, you could store the pricing data for a stock in a file stock_symb.csv:
- Date,Open,High,Low,Close,Volume 2018-07-02,24.320000,24.740000,24.320000,24.670000,61000 2018-07-03,24.799999,25.010000,24.700001,24.830000,50900 2018-07-05,24.850000,24.959999,24.690001,24.900000,59000 2018-07-06,24.980000,25.030001,24.700001,24.790001,51400 2018-07-09,24.950001,25.230000,24.830000,24.950001,92000 2018-07-10,24.950001,25.100000,24.780001,24.830000,107200 2018-07-11,24.750000,25.070000,24.750000,24.840000,81900 2018-07-12,24.879999,24.980000,24.660000,24.969999,35000 2018-07-13,24.969999,25.290001,24.920000,25.020000,55700 2018-07-16,25.049999,25.129999,24.809999,24.920000,49000 2018-07-17,24.920000,25.000000,24.809999,24.950001,58300 2018-07-18,24.959999,25.000000,24.530001,24.780001,48800 2018-07-19,24.780001,24.860001,24.590000,24.750000,49400 2018-07-20,24.700001,24.990000,24.700001,24.730000,78100 2018-07-23,24.730000,24.959999,24.730000,24.920000,49100 2018-07-24,24.900000,24.950001,24.719999,24.809999,43200 2018-07-25,24.799999,24.940001,24.379999,24.540001,44900 2018-07-26,24.]]></description>
-</item><item>
     <title>Voice Conversion</title>
     <link>https://www.andrewszot.com/posts/voice_conversion/</link>
     <pubDate>Tue, 28 Nov 2017 00:00:00 &#43;0000</pubDate>
