@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href='bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <title>Direct Preference Optimization - Andrew Szot</title><meta name="Description" content=""><meta property="og:url" content="http://localhost:1313/posts/direct-preference-optimization/">
+  <meta property="og:site_name" content="Andrew Szot">
+  <meta property="og:title" content="Direct Preference Optimization">
+  <meta property="og:description" content="Introduction TODO.
+Direct Preference Optimization (DPO) Math behind dpo.
+DPO Implementation DPO Results Show the loss, reward accuracy, reward margin. Win Rate Results Describe how we setup llama-7b-instruct as the judge. Show the prompt format and how we run this model on a different GPU. ">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-14T00:00:00+00:00">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Direct Preference Optimization">
+<meta name="twitter:description" content="Introduction TODO.
+Direct Preference Optimization (DPO) Math behind dpo.
+DPO Implementation DPO Results Show the loss, reward accuracy, reward margin. Win Rate Results Describe how we setup llama-7b-instruct as the judge. Show the prompt format and how we run this model on a different GPU. ">
+<meta name="application-name" content="Andrew Szot">
+<meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/direct-preference-optimization/" /><link rel="prev" href="http://localhost:1313/posts/training_parallelism/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Direct Preference Optimization",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/direct-preference-optimization\/"
+        },"genre": "posts","wordcount":  45 ,
+        "url": "http:\/\/localhost:1313\/posts\/direct-preference-optimization\/","datePublished": "2024-12-14T00:00:00+00:00","dateModified": "2024-12-14T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+  <div class="header-wrapper wrap-pad">
+    <div class="title-header content">
+      <div class="inner" style='display: flex'>
+        <a href='/' class='title-link'>
+          <h1>Andrew Szot</h1>
+        </a>
+        <img id='me-picture' src='/landing/me.jpg'>
+      </div>
+      <div class='side-btns'>
+        <a href='/landing/personal_cv.pdf' class="">CV</a>
+        <a href='https://scholar.google.com/citations?hl=en&user=IwIWKPYAAAAJ' class="">Scholar</a>
+        <a href='https://github.com/ASzot' class="">GitHub</a>
+        <a href='/posts' class="">Posts</a>
+        <a href="javascript:void(0);" class="menu-item theme-switch" title="">
+          <i class="fas fa-adjust fa-fw"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="inner" style='display: flex'>
+              <a href='/'>
+                <h1>Andrew Szot</h1>
+              </a>
+              <img id='me-picture' src='/landing/me.jpg'>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/landing/personal_cv.pdf" title="CV">CV</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a class="menu-item" href="/posts" title="Posts">Posts</a><a class="menu-item" href="https://scholar.google.com/citations?hl=en&amp;user=IwIWKPYAAAAJ" title="Scholar" rel="noopener noreffer" target="_blank">Scholar</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main"><div class="toc" id="toc-auto">
+            <h2 class="toc-title"></h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Direct Preference Optimization</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-12-14">2024-12-14</time>&nbsp;</div>
+        </div><div class="details toc open" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Content</span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#direct-preference-optimization-dpo">Direct Preference Optimization (DPO)</a></li>
+    <li><a href="#dpo-implementation">DPO Implementation</a></li>
+    <li><a href="#dpo-results">DPO Results</a></li>
+    <li><a href="#win-rate-results">Win Rate Results</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>TODO.</p>
+<h2 id="direct-preference-optimization-dpo">Direct Preference Optimization (DPO)</h2>
+<p>Math behind dpo.</p>
+<h2 id="dpo-implementation">DPO Implementation</h2>
+<h2 id="dpo-results">DPO Results</h2>
+<ul>
+<li>Show the loss, reward accuracy, reward margin.</li>
+</ul>
+<h2 id="win-rate-results">Win Rate Results</h2>
+<ul>
+<li>Describe how we setup llama-7b-instruct as the judge. Show the prompt format and how we run this model on a different GPU.</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();"></a></span>&nbsp;|&nbsp;<span><a href="/"></a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/training_parallelism/" class="prev" rel="prev" title="Training Parallelism"><i class="fas fa-angle-left fa-fw"></i>Training Parallelism</a></div>
+</div>
+</article></main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i>
+                    Andrew Szot<span itemprop="copyrightYear"> 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
