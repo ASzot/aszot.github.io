@@ -3,7 +3,14 @@
         <title> - Andrew Szot</title>
         <link>https://www.andrewszot.com/posts/</link>
         <description> | Andrew Szot</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 30 Aug 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.andrewszot.com/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 25 Jun 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.andrewszot.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>KV Cache</title>
+    <link>https://www.andrewszot.com/posts/kv_cache/</link>
+    <pubDate>Tue, 25 Jun 2024 00:00:00 &#43;0000</pubDate>
+    <author></author>
+    <guid>https://www.andrewszot.com/posts/kv_cache/</guid>
+    <description><![CDATA[Intro The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model&rsquo;s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.]]></description>
+</item><item>
     <title>Practical Challenges of Imitation Learning from Observation</title>
     <link>https://www.andrewszot.com/posts/on_lfo/</link>
     <pubDate>Sun, 30 Aug 2020 00:00:00 &#43;0000</pubDate>
