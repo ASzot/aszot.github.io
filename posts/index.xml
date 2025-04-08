@@ -9,21 +9,52 @@
     <pubDate>Tue, 25 Jun 2024 00:00:00 &#43;0000</pubDate>
     <author></author>
     <guid>https://www.andrewszot.com/posts/kv_cache/</guid>
-    <description><![CDATA[Intro The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model&rsquo;s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.]]></description>
+    <description><![CDATA[<h2 id="intro">Intro</h2>
+<p>The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model&rsquo;s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.</p>]]></description>
 </item><item>
     <title>Practical Challenges of Imitation Learning from Observation</title>
     <link>https://www.andrewszot.com/posts/on_lfo/</link>
     <pubDate>Sun, 30 Aug 2020 00:00:00 &#43;0000</pubDate>
     <author></author>
     <guid>https://www.andrewszot.com/posts/on_lfo/</guid>
-    <description><![CDATA[Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception.]]></description>
+    <description><![CDATA[<h2 id="overview">Overview</h2>
+<p>In this post, I will explore some practical details in popular imitation learning from
+observation methods. Learning from observation (LfO) is the
+problem of learning a policy from a set of state-only expert demonstrations.
+The goal of LfO is to eventually enable agents to learn by observing humans
+or other robots. However, LfO is difficult because it both requires learning
+perception of what the expert is doing, and then learning a control policy on
+top of this learned perception. We cannot directly apply standard imitation
+learning approaches like Behavioral
+Cloning or Generative Adversarial Imitation Learning
+<a href="/posts/on_lfo/#references" rel="">[2]</a>.</p>]]></description>
 </item><item>
     <title>Voice Conversion</title>
     <link>https://www.andrewszot.com/posts/voice_conversion/</link>
     <pubDate>Tue, 28 Nov 2017 00:00:00 &#43;0000</pubDate>
     <author></author>
     <guid>https://www.andrewszot.com/posts/voice_conversion/</guid>
-    <description><![CDATA[How well can we convert speech between people&rsquo;s voices? By: Andrew Szot, Arshdeep Singh, Md Nasir, Sriram Somasundaram
-Introduction Recently, there have been many exciting results in computer vision with the introduction of deeper convolutional models that encode higher dimensional and interpretable features (neural style) [1]. In contrast, deep and thorough understanding of speech has suffered from the lack of deep learning models catering to audio signals. For a while, traditional audio processing techniques remained dominant over deep learning approaches in terms of audio classification and detection.]]></description>
+    <description><![CDATA[<h2 id="how-well-can-we-convert-speech-between-peoples-voices">How well can we convert speech between people&rsquo;s voices?</h2>
+<p><strong>By: Andrew Szot, Arshdeep Singh, Md Nasir, Sriram Somasundaram</strong></p>
+<h2 id="introduction">Introduction</h2>
+<p>Recently, there have been many exciting results in computer vision with the
+introduction of deeper convolutional models that encode higher dimensional and
+interpretable features (neural style) <a href="https://arxiv.org/pdf/1705.04058.pdf%27" target="_blank" rel="noopener noreffer">[1]</a>.
+In contrast, deep and thorough understanding of speech  has suffered from the lack of deep learning
+models catering to audio signals. For a while, traditional audio processing
+techniques remained dominant over deep learning approaches in terms of audio
+classification and detection. Specifically, generative models in audio were
+just until recently dominated by traditional audio processing techniques.
+Rather than using a deep learning model, many of the generative models would
+piece together the correct speech fragments stored in a large database, while
+some others use traditional features fed into a deep learning architecture.
+End-to-end deep learning has been a rarity in speech applications due to the
+fundamental characteristics of temporal structure of speech which contains  so
+many different informations crammed together&ndash;speaker characteristics (voice),
+linguistic content (language),  paralinguistics (emotion and behavior). Several
+new generative audio deep learning models such as Tacotron <a href="https://arxiv.org/pdf/1703.10135.pdf" target="_blank" rel="noopener noreffer">[2]</a> and Wavenet
+<a href="https://arxiv.org/pdf/1609.03499.pdf" target="_blank" rel="noopener noreffer">[3]</a> have brought change to this situation. A
+good amount of research has already been done into how these models can be used
+for text to speech (TTS), speech generation, or speech classification.</p>]]></description>
 </item></channel>
 </rss>

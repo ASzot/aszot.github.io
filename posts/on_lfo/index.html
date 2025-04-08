@@ -10,14 +10,16 @@
         <title>Practical Challenges of Imitation Learning from Observation - Andrew Szot</title><meta name="Description" content=""><meta property="og:url" content="https://www.andrewszot.com/posts/on_lfo/">
   <meta property="og:site_name" content="Andrew Szot">
   <meta property="og:title" content="Practical Challenges of Imitation Learning from Observation">
-  <meta property="og:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception.">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception. We cannot directly apply standard imitation learning approaches like Behavioral Cloning or Generative Adversarial Imitation Learning [2].">
+  <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2020-08-30T00:00:00+00:00">
     <meta property="article:modified_time" content="2020-08-30T00:00:00+00:00">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Practical Challenges of Imitation Learning from Observation">
-<meta name="twitter:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Practical Challenges of Imitation Learning from Observation">
+  <meta name="twitter:description" content="Overview In this post, I will explore some practical details in popular imitation learning from observation methods. Learning from observation (LfO) is the problem of learning a policy from a set of state-only expert demonstrations. The goal of LfO is to eventually enable agents to learn by observing humans or other robots. However, LfO is difficult because it both requires learning perception of what the expert is doing, and then learning a control policy on top of this learned perception. We cannot directly apply standard imitation learning approaches like Behavioral Cloning or Generative Adversarial Imitation Learning [2].">
 <meta name="application-name" content="Andrew Szot">
 <meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -72,7 +74,8 @@
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/landing/personal_cv.pdf" title="CV">CV</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a class="menu-item" href="https://scholar.google.com/citations?hl=en&amp;user=IwIWKPYAAAAJ" title="Scholar" rel="noopener noreffer" target="_blank">Scholar</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
                 <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
+            </a>
+        </div>
     </div>
 </header>
 <div class="search-dropdown desktop">
@@ -166,66 +169,66 @@ The table of hyperparameters used for this plot is below.</p>
     </a><figcaption class="image-caption">BCO results. Lines are averages and shaded regions are standard deviations over 3 seeds.</figcaption>
     </figure>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Hyperparam</th>
-<th style="text-align:center">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$\alpha$ (num updates)</td>
-<td style="text-align:center">50</td>
-</tr>
-<tr>
-<td style="text-align:center">Inverse model architecture</td>
-<td style="text-align:center">(400,300)</td>
-</tr>
-<tr>
-<td style="text-align:center">Inverse model learning rate</td>
-<td style="text-align:center">3e-4</td>
-</tr>
-<tr>
-<td style="text-align:center">Inverse model learning rate decay</td>
-<td style="text-align:center">No</td>
-</tr>
-<tr>
-<td style="text-align:center"># epochs per inverse model update</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">BC policy architecture</td>
-<td style="text-align:center">(400,300)</td>
-</tr>
-<tr>
-<td style="text-align:center">BC learning rate</td>
-<td style="text-align:center">3e-4</td>
-</tr>
-<tr>
-<td style="text-align:center">BC learning rate decay</td>
-<td style="text-align:center">No</td>
-</tr>
-<tr>
-<td style="text-align:center"># epochs per BC update</td>
-<td style="text-align:center">10</td>
-</tr>
-<tr>
-<td style="text-align:center">State normalization</td>
-<td style="text-align:center">Yes, from expert state data</td>
-</tr>
-<tr>
-<td style="text-align:center">BC stochastic policy</td>
-<td style="text-align:center">Yes, learned mean and standard dev for norm dist</td>
-</tr>
-<tr>
-<td style="text-align:center"># random exploration steps</td>
-<td style="text-align:center">200k</td>
-</tr>
-<tr>
-<td style="text-align:center">total # environment steps</td>
-<td style="text-align:center">10M</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Hyperparam</th>
+          <th style="text-align: center">Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">$\alpha$ (num updates)</td>
+          <td style="text-align: center">50</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Inverse model architecture</td>
+          <td style="text-align: center">(400,300)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Inverse model learning rate</td>
+          <td style="text-align: center">3e-4</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Inverse model learning rate decay</td>
+          <td style="text-align: center">No</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"># epochs per inverse model update</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BC policy architecture</td>
+          <td style="text-align: center">(400,300)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BC learning rate</td>
+          <td style="text-align: center">3e-4</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BC learning rate decay</td>
+          <td style="text-align: center">No</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"># epochs per BC update</td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">State normalization</td>
+          <td style="text-align: center">Yes, from expert state data</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BC stochastic policy</td>
+          <td style="text-align: center">Yes, learned mean and standard dev for norm dist</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"># random exploration steps</td>
+          <td style="text-align: center">200k</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">total # environment steps</td>
+          <td style="text-align: center">10M</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="gaifo">GAIfO</h2>
 <p><strong>Reward Type</strong>: Since GAIfO relies on adversarial training it can be very sensitive to
@@ -257,50 +260,50 @@ hyperparameters except the reward type are fixed across runs. Interestingly, som
     </a><figcaption class="image-caption">GAIfO reward type comparisons. Lines are averages and shaded regions are standard deviations over 3 seeds.</figcaption>
     </figure>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Hyperparam</th>
-<th style="text-align:center">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Policy architecture</td>
-<td style="text-align:center">(400,300)</td>
-</tr>
-<tr>
-<td style="text-align:center">Policy optimizer</td>
-<td style="text-align:center">PPO</td>
-</tr>
-<tr>
-<td style="text-align:center">PPO entropy coefficient</td>
-<td style="text-align:center">0.001</td>
-</tr>
-<tr>
-<td style="text-align:center">Policy learning rate</td>
-<td style="text-align:center">0.001</td>
-</tr>
-<tr>
-<td style="text-align:center">Policy learning rate decay</td>
-<td style="text-align:center">Yes</td>
-</tr>
-<tr>
-<td style="text-align:center">Discriminator architecture</td>
-<td style="text-align:center">(400,300)</td>
-</tr>
-<tr>
-<td style="text-align:center">Discriminator learning rate</td>
-<td style="text-align:center">0.001</td>
-</tr>
-<tr>
-<td style="text-align:center"># of discriminator updates per policy update</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">total # environment steps</td>
-<td style="text-align:center">10M</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Hyperparam</th>
+          <th style="text-align: center">Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Policy architecture</td>
+          <td style="text-align: center">(400,300)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Policy optimizer</td>
+          <td style="text-align: center">PPO</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PPO entropy coefficient</td>
+          <td style="text-align: center">0.001</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Policy learning rate</td>
+          <td style="text-align: center">0.001</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Policy learning rate decay</td>
+          <td style="text-align: center">Yes</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Discriminator architecture</td>
+          <td style="text-align: center">(400,300)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Discriminator learning rate</td>
+          <td style="text-align: center">0.001</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"># of discriminator updates per policy update</td>
+          <td style="text-align: center">2</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">total # environment steps</td>
+          <td style="text-align: center">10M</td>
+      </tr>
+  </tbody>
 </table>
 <p>Another important consideration is the discriminator should be updated more
 frequently than the policy. By updating the discriminator more, it will be

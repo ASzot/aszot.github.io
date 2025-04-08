@@ -11,13 +11,15 @@
   <meta property="og:site_name" content="Andrew Szot">
   <meta property="og:title" content="KV Cache">
   <meta property="og:description" content="Intro The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model’s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-06-25T00:00:00+00:00">
     <meta property="article:modified_time" content="2024-06-25T00:00:00+00:00">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="KV Cache">
-<meta name="twitter:description" content="Intro The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model&rsquo;s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="KV Cache">
+  <meta name="twitter:description" content="Intro The Key-Value (KV) cache is used to speed up next token prediction in transformer models. For example, when large language models (LLMs) are generating text, the KV cache stores the model’s activations for previously generated text to efficiently generate the next token. While not used during training, the KV cache is a crucial implementation detail for fast transformer inference. In this post, I go over KV cache implementation details and show that it results in a $20\times$ inference speedup over naive transformer inference.">
 <meta name="application-name" content="Andrew Szot">
 <meta name="apple-mobile-web-app-title" content="Andrew Szot"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -72,7 +74,8 @@
         </div>
         <div class="menu" id="menu-mobile"><a class="menu-item" href="/landing/personal_cv.pdf" title="CV">CV</a><a class="menu-item" href="https://github.com/aszot" title="" rel="noopener noreffer" target="_blank">GitHub</a><a class="menu-item" href="https://scholar.google.com/citations?hl=en&amp;user=IwIWKPYAAAAJ" title="Scholar" rel="noopener noreffer" target="_blank">Scholar</a><a href="javascript:void(0);" class="menu-item theme-switch" title="">
                 <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
+            </a>
+        </div>
     </div>
 </header>
 <div class="search-dropdown desktop">
@@ -558,30 +561,30 @@ Where $[A, B]$ indicates concatenating the rows of $A$ and $B$. Notice that $\te
 <h2 id="conclusion">Conclusion</h2>
 <p>The final KV cache implementation with the preallocatd KV cache and torch compile was almost <strong>21x</strong> faster than the generation code without any KV cache. The numbers per setting are summarized below.</p>
 <table>
-<thead>
-<tr>
-<th>Setting</th>
-<th style="text-align:center">Steps-Per-Second</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>No KV Cache</td>
-<td style="text-align:center">27</td>
-</tr>
-<tr>
-<td>Dynamic KV Cache</td>
-<td style="text-align:center">248</td>
-</tr>
-<tr>
-<td>Preallocated KV cache</td>
-<td style="text-align:center">327</td>
-</tr>
-<tr>
-<td>Preallocated KV cache - with torch compile</td>
-<td style="text-align:center">554</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Setting</th>
+          <th style="text-align: center">Steps-Per-Second</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>No KV Cache</td>
+          <td style="text-align: center">27</td>
+      </tr>
+      <tr>
+          <td>Dynamic KV Cache</td>
+          <td style="text-align: center">248</td>
+      </tr>
+      <tr>
+          <td>Preallocated KV cache</td>
+          <td style="text-align: center">327</td>
+      </tr>
+      <tr>
+          <td>Preallocated KV cache - with torch compile</td>
+          <td style="text-align: center">554</td>
+      </tr>
+  </tbody>
 </table>
 <p>All the code for this post is at <a href="https://github.com/ASzot/kv-cache" target="_blank" rel="noopener noreffer">github.com/ASzot/kv-cache</a>. The code is just a short single Python file and only takes a couple seconds to run on a consumer grade GPU.</p>
 <p>If you have any questions or spot any errors, contact <a href="mailto:asz.post.contact@gmail.com" rel="">asz.post.contact@gmail.com</a>. Join <a href="https://mailchi.mp/30a660245978/add-email" target="_blank" rel="noopener noreffer">the email list here</a> to be notified about new posts.</p>
